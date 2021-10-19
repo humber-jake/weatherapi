@@ -2,10 +2,11 @@ const express = require('express');
 const app = express();
 const PORT = 8000;
 
-const fakeWeather = (city) => {
+import allCities from './cities';
+
+const fakeWeather = () => {
     let weather = [`sunny`, `rainy`, `overcast`, `snowing`, `hail`, `freezing rain`]
     let result = {};
-        result.city = city;
         result.currentWeather = weather[Math.floor(Math.random() * 6)];
         result.temperature =`${Math.floor(Math.random() * 60 + 40)}°F`;
         result.humidity = `${Math.floor(Math.random() * 100)}%`;
@@ -17,6 +18,12 @@ app.use(express.json());
 app.use(express.static(__dirname + `/public`));
 app.set('view engine','ejs');
 
+class Weather {
+    constructor(city){
+        this.city = city;
+        this.data = fakeWeather();
+    }
+}
 
 app.get('/', (req, res) => {
  res.redirect('weather');
@@ -27,7 +34,7 @@ app.get('/weather', (req, res) => {
 })
 
 app.get('/weather/:city', (req, res) => {
-    res.send(fakeWeather(req.params.city));
+    res.send(trimCities(allCities));
 })
 
 app.listen(PORT, () => {
