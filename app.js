@@ -1,7 +1,6 @@
 const express = require('express');
 const app = express();
 const PORT = 8000;
-const html = require('html');
 
 const fakeWeather = (city) => {
     let weather = [`sunny`, `rainy`, `overcast`, `snowing`, `hail`, `freezing rain`]
@@ -15,14 +14,16 @@ const fakeWeather = (city) => {
 }
 
 app.use(express.json());
-app.set('view engine', 'html');
+app.use(express.static(__dirname + `/public`));
+app.set('view engine','ejs');
+
 
 app.get('/', (req, res) => {
  res.redirect('weather');
 })
 
 app.get('/weather', (req, res) => {
- res.render('index.html');
+    res.render('index');
 })
 
 app.get('/weather/:city', (req, res) => {
