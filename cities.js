@@ -82,7 +82,6 @@ const allCities = [
     "Washington, D.C.",
     "Milwaukee",
     "Scarborough",
-    "Vancouver",
     "Morelia",
     "Reynosa",
     "New Kingston",
@@ -390,4 +389,4 @@ const allCities = [
     "Playa del Carmen"
     ]
 
-    export default allCities;
+module.exports =  allCities;
