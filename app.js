@@ -12,9 +12,9 @@ const fakeWeather = (city) => {
     let result = {};
         result.city = city;
         result.currentWeather = weather[Math.floor(Math.random() * 6)];
-        result.temperature =`${Math.floor(Math.random() * 60 + 40)}°F`;
         result.humidity = `${Math.floor(Math.random() * 100)}%`;
         result.percentageOfPrecipitation = `${Math.floor(Math.random() * 10) * 10}%`;
+        result.temperature =`${Math.floor(Math.random() * 60 + 40)}°F`;
         return result;
 }
 
@@ -64,7 +64,11 @@ const data = seedCities(allCities);
 // Routes
 
 app.get('/', (req, res) => {
- res.redirect('weather');
+    let result;
+    if(Object.entries(req.query).length > 0){
+       result = findCity(req.query.city, data);
+    }
+        res.render('index', {result: result});
 })
 
 app.get('/weather', (req, res) => {

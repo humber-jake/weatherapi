@@ -9,6 +9,25 @@
 </head>
 <body>
     <h1>This is the weather page!</h1>
-    
+    <div>
+        <form action="/" method="GET">
+            <input id="city" type="text" name="city">
+            <button>SEARCH</button>
+        </form>
+        <div>
+            <%if(typeof result == 'string' && result !== undefined){%>
+                <h2><%= result %></h2>
+            <%}%>
+          <%  if(typeof result == 'object' && result !== undefined){  %>
+                <p>City: <%= result.city %></p>
+                <p>Current weather: <%= result.currentWeather%></p>
+                <p>Humidity: <%= result.humidity%></p>
+                <p>Percentage of precipitation: <%= result.percentageOfPrecipitation%></p>
+                <p>Temperature: <%= result.temperature%></p>
+            <%}%>
+          
+
+        </div>
+    </div>
 </body>
 </html>
